@@ -1,3 +1,4 @@
+import java.util.*;
 
 class rivisionArray {
 
@@ -46,22 +47,27 @@ class rivisionArray {
         }
     }
 
-    public static void printSubarray(int arr[]) {
+    public static int printSubarrayMax(int arr[]) {
+        int maxSum = Integer.MIN_VALUE;
 
         if (arr == null || arr.length == 0) {
             System.out.println("Array is empty or null.");
-            return;
+            return -1;
         }
 
-         for (int i = 0; i < arr.length; i++) {
+        for (int i = 0; i < arr.length; i++) {
             for (int j = i; j < arr.length; j++) {
+                int curSum = 0;
                 for (int k = i; k <= j; k++) {
                     System.out.print(arr[k] + " ");
+                    curSum += arr[k];
                 }
-                System.out.println();
+                System.out.println("-> Sum: " + curSum);
+                maxSum = Math.max(maxSum, curSum);
             }
         }
-
+        System.out.println("Maximum Subarray Sum: " + maxSum);
+        return maxSum;
     }
 
     public static void main(String[] args) {
@@ -83,7 +89,7 @@ class rivisionArray {
 
         // printArrayPairs(arr);
 
-        // printSubarray(arr);
+        printSubarrayMax(arr);
 
     }
 }
