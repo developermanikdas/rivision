@@ -38,30 +38,52 @@ class rivisionArray {
 
     }
 
-    public static void printSubarray(){
-        
+    public static void printArrayPairs(int arr[]) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = i + 1; j < arr.length; j++) {
+                System.out.println(arr[i] + " " + arr[j]);
+            }
+        }
     }
+
+    public static void printSubarray(int arr[]) {
+
+        if (arr == null || arr.length == 0) {
+            System.out.println("Array is empty or null.");
+            return;
+        }
+
+         for (int i = 0; i < arr.length; i++) {
+            for (int j = i; j < arr.length; j++) {
+                for (int k = i; k <= j; k++) {
+                    System.out.print(arr[k] + " ");
+                }
+                System.out.println();
+            }
+        }
+
+    }
+
     public static void main(String[] args) {
-        int arr[] = { 1, 3, 5, 7, 8, 9 };
+        int arr[] = { 1, 3, 5, 7 };
 
         // binary Search function call 👇👇👇
         // int binarySearchResult = binarySearch(arr, 1);
         // if (binarySearchResult != -1) {
-        //     System.out.println("The target is found at index " + binarySearchResult);
+        // System.out.println("The target is found at index " + binarySearchResult);
         // } else {
-        //     System.out.println("The target is not found");
+        // System.out.println("The target is not found");
         // }
-
 
         // reverse an array 👇👇👇
         // reverseArray(arr);
         // for(int i : arr){
-        //     System.out.println(i);
+        // System.out.println(i);
         // }
 
+        // printArrayPairs(arr);
 
-
-
+        // printSubarray(arr);
 
     }
 }
