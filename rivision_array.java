@@ -47,7 +47,7 @@ class rivisionArray {
         }
     }
 
-    public static int printSubarrayMax(int arr[]) {
+    public static int printSubarrayMaxBruteForce(int arr[]) {
         int maxSum = Integer.MIN_VALUE;
 
         if (arr == null || arr.length == 0) {
@@ -69,7 +69,12 @@ class rivisionArray {
         System.out.println("Maximum Subarray Sum: " + maxSum);
         return maxSum;
     }
-
+ 
+    public static int printSubarrayMaxPrefixSum(int[] arr){
+        int length = arr.length; 
+        int prfixArr[length] = new Array; 
+        return 69;
+    }
     public static void main(String[] args) {
         int arr[] = { 1, 3, 5, 7 };
 
@@ -87,9 +92,14 @@ class rivisionArray {
         // System.out.println(i);
         // }
 
+        // print array pairs 👇👇👇
         // printArrayPairs(arr);
 
-        printSubarrayMax(arr);
+        // print sub-array max 👇👇👇
+
+        // printSubarrayMaxBrute(arr);👇👇👇
+
+        
 
     }
 }
