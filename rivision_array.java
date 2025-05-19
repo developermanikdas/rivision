@@ -70,11 +70,28 @@ class rivisionArray {
         return maxSum;
     }
  
-    public static int printSubarrayMaxPrefixSum(int[] arr){
-        int length = arr.length; 
-        int prfixArr[length] = new Array; 
-        return 69;
+      public static int maxSubarraySum(int[] arr) {
+        int n = arr.length;
+
+        // Step 1: Build Prefix Sum Array
+        int[] prefix = new int[n];
+        prefix[0] = arr[0];
+        for (int i = 1; i < n; i++) {
+            prefix[i] = prefix[i - 1] + arr[i];
+        }
+
+        // Step 2: Calculate max subarray sum using prefix array
+        int maxSum = prefix[0];
+        int minPrefix = 0;  // Important: minPrefix before any elements is 0
+
+        for (int i = 0; i < n; i++) {
+            maxSum = Math.max(maxSum, prefix[i] - minPrefix);
+            minPrefix = Math.min(minPrefix, prefix[i]);
+        }
+
+        return maxSum;
     }
+
     public static void main(String[] args) {
         int arr[] = { 1, 3, 5, 7 };
 
@@ -99,7 +116,7 @@ class rivisionArray {
 
         // printSubarrayMaxBrute(arr);👇👇👇
 
-        
+        maxSubarraySum(arr); 
 
     }
 }
