@@ -92,6 +92,19 @@ class rivisionArray {
         return maxSum;
     }
 
+     public static int maxSubArray(int[] nums) {
+        int currentSum = nums[0];
+        int maxSum = nums[0];
+        
+        for (int i = 1; i < nums.length; i++) {
+            // either take the current element alone or extend the previous subarray
+            currentSum = Math.max(nums[i], currentSum + nums[i]);
+            maxSum = Math.max(maxSum, currentSum);
+        }
+        
+        return maxSum;
+    }
+
     public static void main(String[] args) {
         int arr[] = { 1, 3, 5, 7 };
 
@@ -117,6 +130,8 @@ class rivisionArray {
         // printSubarrayMaxBrute(arr);👇👇👇
 
         maxSubarraySum(arr); 
+
+        maxSubArray(arr);
 
     }
 }
