@@ -104,7 +104,28 @@ class rivisionArray {
         
         return maxSum;
     }
+    public static int lengthOfLongestSubstring(String s) {
+        HashMap<Character, Integer> map = new HashMap<>();
+        int maxLen = 0;
+        int start = 0; // left boundary of the sliding window
 
+        for (int end = 0; end < s.length(); end++) {
+            char currentChar = s.charAt(end);
+
+            // If the character is repeated, move start just after the last seen index
+            if (map.containsKey(currentChar)) {
+                start = Math.max(start, map.get(currentChar) + 1);
+            }
+
+            // Update or insert current character's index
+            map.put(currentChar, end);
+
+            // Update max length
+            maxLen = Math.max(maxLen, end - start + 1);
+        }
+
+        return maxLen;
+    }
     public static void main(String[] args) {
         int arr[] = { 1, 3, 5, 7 };
 
