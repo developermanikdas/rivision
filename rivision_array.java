@@ -69,8 +69,8 @@ class rivisionArray {
         System.out.println("Maximum Subarray Sum: " + maxSum);
         return maxSum;
     }
- 
-      public static int maxSubarraySum(int[] arr) {
+
+    public static int maxSubarraySumPrefix(int[] arr) {
         int n = arr.length;
 
         // Step 1: Build Prefix Sum Array
@@ -82,7 +82,7 @@ class rivisionArray {
 
         // Step 2: Calculate max subarray sum using prefix array
         int maxSum = prefix[0];
-        int minPrefix = 0;  // Important: minPrefix before any elements is 0
+        int minPrefix = 0; // Important: minPrefix before any elements is 0
 
         for (int i = 0; i < n; i++) {
             maxSum = Math.max(maxSum, prefix[i] - minPrefix);
@@ -92,42 +92,21 @@ class rivisionArray {
         return maxSum;
     }
 
-     public static int maxSubArray(int[] nums) {
+    public static int maxSubArray(int[] nums) {
         int currentSum = nums[0];
         int maxSum = nums[0];
-        
+
         for (int i = 1; i < nums.length; i++) {
             // either take the current element alone or extend the previous subarray
             currentSum = Math.max(nums[i], currentSum + nums[i]);
             maxSum = Math.max(maxSum, currentSum);
         }
-        
+
         return maxSum;
     }
-    public static int lengthOfLongestSubstring(String s) {
-        HashMap<Character, Integer> map = new HashMap<>();
-        int maxLen = 0;
-        int start = 0; // left boundary of the sliding window
 
-        for (int end = 0; end < s.length(); end++) {
-            char currentChar = s.charAt(end);
-
-            // If the character is repeated, move start just after the last seen index
-            if (map.containsKey(currentChar)) {
-                start = Math.max(start, map.get(currentChar) + 1);
-            }
-
-            // Update or insert current character's index
-            map.put(currentChar, end);
-
-            // Update max length
-            maxLen = Math.max(maxLen, end - start + 1);
-        }
-
-        return maxLen;
-    }
     public static void main(String[] args) {
-        int arr[] = { 1, 3, 5, 7 };
+        int arr[] = { 1, -13, 5, 7 };
 
         // binary Search function call 👇👇👇
         // int binarySearchResult = binarySearch(arr, 1);
@@ -148,11 +127,12 @@ class rivisionArray {
 
         // print sub-array max 👇👇👇
 
-        // printSubarrayMaxBrute(arr);👇👇👇
+        // printSubarrayMaxBrute(arr);
 
-        maxSubarraySum(arr); 
+        // maxSubarraySumPrefix(arr);
 
-        maxSubArray(arr);
+
+        System.out.println(maxSubArray(arr));   
 
     }
 }
