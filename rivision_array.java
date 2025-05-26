@@ -82,7 +82,7 @@ class rivisionArray {
         int maxSum = Integer.MIN_VALUE;
         for (int i = 0; i < arr.length; i++) {
             for (int j = i; j < arr.length; j++) {
-                int curSum = i==0 ? prefixArr[j] : prefixArr[j] - prefixArr[i-1]; 
+                int curSum = i == 0 ? prefixArr[j] : prefixArr[j] - prefixArr[i - 1];
                 maxSum = Math.max(curSum, maxSum);
                 System.out.println(" Current Sum is: -> " + curSum);
             }
@@ -93,48 +93,19 @@ class rivisionArray {
         return maxSum;
     }
 
-    public int trap(int[] height) {
-        int left = 0, right = height.length - 1;
-        int leftMax = 0, rightMax = 0;
-        int water = 0;
+    public static void kadaneAlgorithm(int arr[]) {
+        int n = arr.length;
 
-        while (left < right) {
-            if (height[left] < height[right]) {
-                if (height[left] >= leftMax)
-                    leftMax = height[left];
-                else
-                    water += leftMax - height[left];
-                left++;
-            } else {
-                if (height[right] >= rightMax)
-                    rightMax = height[right];
-                else
-                    water += rightMax - height[right];
-                right--;
+        int curSum = 0, maxSum = Integer.MIN_VALUE;
+        for (int i = 0; i < n; i++) {
+            curSum = curSum + arr[i];
+            maxSum = Math.max(curSum, maxSum);
+
+            if (curSum < 0) {
+                curSum = 0;
             }
         }
-        return water;
-    }
-
-    public class BuyAndSellStock {
-        public int maxProfit(int[] prices) {
-            int minPrice = Integer.MAX_VALUE;
-            int maxProfit = 0;
-
-            for (int price : prices) {
-                // If we find a lower price, update minPrice
-                if (price < minPrice) {
-                    minPrice = price;
-                }
-                // Else calculate profit if we sell today
-                else {
-                    int profit = price - minPrice;
-                    maxProfit = Math.max(maxProfit, profit);
-                }
-            }
-
-            return maxProfit;
-        }
+        System.out.println("Max Subarray Sum is: " + maxSum);
     }
 
     public static void main(String[] args) {
@@ -164,7 +135,8 @@ class rivisionArray {
         // maxSubarraySumPrefix(arr);
 
         // System.out.println(maxSubArray(arr));
-        maxSubarraySumPrefix(arr);
+        // maxSubarraySumPrefix(arr);
+        // kadaneAlgorithm(arr);
 
     }
 }
