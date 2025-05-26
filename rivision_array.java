@@ -73,34 +73,22 @@ class rivisionArray {
     public static int maxSubarraySumPrefix(int[] arr) {
         int n = arr.length;
 
-        // Step 1: Build Prefix Sum Array
-        int[] prefix = new int[n];
-        prefix[0] = arr[0];
+        int[] prefixArr = new int[n];
+        prefixArr[0] = arr[0];
         for (int i = 1; i < n; i++) {
-            prefix[i] = prefix[i - 1] + arr[i];
+            prefixArr[i] = prefixArr[i - 1] + arr[i];
         }
 
-        // Step 2: Calculate max subarray sum using prefix array
-        int maxSum = prefix[0];
-        int minPrefix = 0; // Important: minPrefix before any elements is 0
-
-        for (int i = 0; i < n; i++) {
-            maxSum = Math.max(maxSum, prefix[i] - minPrefix);
-            minPrefix = Math.min(minPrefix, prefix[i]);
+        int maxSum = Integer.MIN_VALUE;
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = i; j < arr.length; j++) {
+                int curSum = i==0 ? prefixArr[j] : prefixArr[j] - prefixArr[i-1]; 
+                maxSum = Math.max(curSum, maxSum);
+                System.out.println(" Current Sum is: -> " + curSum);
+            }
         }
 
-        return maxSum;
-    }
-
-    public static int maxSubArray(int[] nums) {
-        int currentSum = nums[0];
-        int maxSum = nums[0];
-
-        for (int i = 1; i < nums.length; i++) {
-            // either take the current element alone or extend the previous subarray
-            currentSum = Math.max(nums[i], currentSum + nums[i]);
-            maxSum = Math.max(maxSum, currentSum);
-        }
+        System.out.println("Max Sum is: -> " + maxSum);
 
         return maxSum;
     }
@@ -175,7 +163,8 @@ class rivisionArray {
 
         // maxSubarraySumPrefix(arr);
 
-        System.out.println(maxSubArray(arr));
+        // System.out.println(maxSubArray(arr));
+        maxSubarraySumPrefix(arr);
 
     }
 }
