@@ -108,8 +108,35 @@ class rivisionArray {
         System.out.println("Max Subarray Sum is: " + maxSum);
     }
 
+    public static void rainWaterTrap(int[] arr) {
+        int n = arr.length;
+
+        // left Max arr
+        int leftMax[] = new int[n]; // 5
+        leftMax[0] = arr[0];
+        for (int i = 1; i < n; i++) {
+            leftMax[i] = Math.max(leftMax[i - 1], arr[i]);
+        }
+
+        // right max arr
+        int rightMax[] = new int[n]; // 5
+        rightMax[n - 1] = arr[n - 1];
+        for (int i = n - 2; i >= 0; i--) {
+            rightMax[i] = Math.max(rightMax[i + 1], arr[i]);
+        }
+        int totalWater = 0;
+        // calculate water
+        for (int i = 0; i < n; i++) {
+            int height = Math.min(rightMax[i], leftMax[i]);
+            int water = height - arr[i];
+            totalWater += water;
+        }
+
+        System.out.println(totalWater);
+    }
+
     public static void main(String[] args) {
-        int arr[] = { 1, -13, 5, 7 };
+        int arr[] = { 4, 2, 0, 6, 3, 2, 5 };
 
         // binary Search function call 👇👇👇
         // int binarySearchResult = binarySearch(arr, 1);
@@ -137,6 +164,7 @@ class rivisionArray {
         // System.out.println(maxSubArray(arr));
         // maxSubarraySumPrefix(arr);
         // kadaneAlgorithm(arr);
+        // rainWaterTrap(arr);
 
     }
 }
