@@ -135,8 +135,22 @@ class rivisionArray {
         System.out.println(totalWater);
     }
 
+    public static void buySellStock(int[] price) {
+        int n = price.length;
+
+        int profit = 0;
+        int minPrice = Integer.MAX_VALUE;
+
+        for (int i = 0; i < n; i++) {
+            int todayPrice = price[i];
+            minPrice = Math.min(todayPrice, minPrice);
+            profit = Math.max(profit, todayPrice - minPrice);
+        }
+         System.out.println(profit); 
+    }
+
     public static void main(String[] args) {
-        int arr[] = { 4, 2, 0, 6, 3, 2, 5 };
+        int arr[] = { 7, 1, 5, 3, 6, 4 };
 
         // binary Search function call 👇👇👇
         // int binarySearchResult = binarySearch(arr, 1);
@@ -165,6 +179,7 @@ class rivisionArray {
         // maxSubarraySumPrefix(arr);
         // kadaneAlgorithm(arr);
         // rainWaterTrap(arr);
+        // buySellStock(arr);
 
     }
 }
