@@ -51,18 +51,7 @@ public class rivision_basic_array_sorting {
         System.out.println();
     }
 
-    // Main method to test the sort
-    public static void main(String[] args) {
-        int[] arr = {9, 5, 1, 4, 3};
-
-        System.out.println("Before sorting:");
-        printArray(arr);
-
-        insertionSort(arr);
-
-        System.out.println("After sorting:");
-        printArray(arr);
-    }
+ 
     public static void main(String[] args) {
         int arr[] = { 3, 1, 4, 2 };
         bubbleSort(arr);
