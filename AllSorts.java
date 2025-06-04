@@ -8,11 +8,14 @@ public class AllSorts {
             boolean swapped = false;
             for (int j = 0; j < arr.length - i - 1; j++) {
                 if (arr[j] > arr[j + 1]) {
-                    int temp = arr[j]; arr[j] = arr[j + 1]; arr[j + 1] = temp;
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
                     swapped = true;
                 }
             }
-            if (!swapped) break;
+            if (!swapped)
+                break;
         }
     }
 
@@ -21,8 +24,11 @@ public class AllSorts {
         for (int i = 0; i < arr.length - 1; i++) {
             int minIdx = i;
             for (int j = i + 1; j < arr.length; j++)
-                if (arr[j] < arr[minIdx]) minIdx = j;
-            int temp = arr[minIdx]; arr[minIdx] = arr[i]; arr[i] = temp;
+                if (arr[j] < arr[minIdx])
+                    minIdx = j;
+            int temp = arr[minIdx];
+            arr[minIdx] = arr[i];
+            arr[i] = temp;
         }
     }
 
@@ -52,8 +58,10 @@ public class AllSorts {
         int i = 0, j = 0, k = l;
         while (i < left.length && j < right.length)
             arr[k++] = (left[i] <= right[j]) ? left[i++] : right[j++];
-        while (i < left.length) arr[k++] = left[i++];
-        while (j < right.length) arr[k++] = right[j++];
+        while (i < left.length)
+            arr[k++] = left[i++];
+        while (j < right.length)
+            arr[k++] = right[j++];
     }
 
     // 5. Quick Sort
@@ -70,29 +78,40 @@ public class AllSorts {
         for (int j = low; j < high; j++) {
             if (arr[j] <= pivot) {
                 i++;
-                int temp = arr[i]; arr[i] = arr[j]; arr[j] = temp;
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
             }
         }
-        int temp = arr[i + 1]; arr[i + 1] = arr[high]; arr[high] = temp;
+        int temp = arr[i + 1];
+        arr[i + 1] = arr[high];
+        arr[high] = temp;
         return i + 1;
     }
 
     // 6. Heap Sort
     public static void heapSort(int[] arr) {
         int n = arr.length;
-        for (int i = n / 2 - 1; i >= 0; i--) heapify(arr, n, i);
+        for (int i = n / 2 - 1; i >= 0; i--)
+            heapify(arr, n, i);
         for (int i = n - 1; i > 0; i--) {
-            int temp = arr[0]; arr[0] = arr[i]; arr[i] = temp;
+            int temp = arr[0];
+            arr[0] = arr[i];
+            arr[i] = temp;
             heapify(arr, i, 0);
         }
     }
 
     private static void heapify(int[] arr, int n, int i) {
         int largest = i, l = 2 * i + 1, r = 2 * i + 2;
-        if (l < n && arr[l] > arr[largest]) largest = l;
-        if (r < n && arr[r] > arr[largest]) largest = r;
+        if (l < n && arr[l] > arr[largest])
+            largest = l;
+        if (r < n && arr[r] > arr[largest])
+            largest = r;
         if (largest != i) {
-            int temp = arr[i]; arr[i] = arr[largest]; arr[largest] = temp;
+            int temp = arr[i];
+            arr[i] = arr[largest];
+            arr[largest] = temp;
             heapify(arr, n, largest);
         }
     }
@@ -101,10 +120,12 @@ public class AllSorts {
     public static void countingSort(int[] arr) {
         int max = Arrays.stream(arr).max().orElse(0);
         int[] count = new int[max + 1];
-        for (int num : arr) count[num]++;
+        for (int num : arr)
+            count[num]++;
         int idx = 0;
         for (int i = 0; i < count.length; i++)
-            while (count[i]-- > 0) arr[idx++] = i;
+            while (count[i]-- > 0)
+                arr[idx++] = i;
     }
 
     // 8. Radix Sort
@@ -117,8 +138,10 @@ public class AllSorts {
     private static void countingSortByDigit(int[] arr, int exp) {
         int[] output = new int[arr.length];
         int[] count = new int[10];
-        for (int num : arr) count[(num / exp) % 10]++;
-        for (int i = 1; i < 10; i++) count[i] += count[i - 1];
+        for (int num : arr)
+            count[(num / exp) % 10]++;
+        for (int i = 1; i < 10; i++)
+            count[i] += count[i - 1];
         for (int i = arr.length - 1; i >= 0; i--) {
             int digit = (arr[i] / exp) % 10;
             output[--count[digit]] = arr[i];
@@ -129,24 +152,50 @@ public class AllSorts {
     // 9. Bucket Sort (for [0, 1) float values)
     public static void bucketSort(float[] arr) {
         int n = arr.length;
-        if (n <= 0) return;
+        if (n <= 0)
+            return;
         List<Float>[] buckets = new List[n];
-        for (int i = 0; i < n; i++) buckets[i] = new ArrayList<>();
+        for (int i = 0; i < n; i++)
+            buckets[i] = new ArrayList<>();
         for (float num : arr) {
-            int idx = (int)(n * num);
+            int idx = (int) (n * num);
             buckets[idx].add(num);
         }
-        for (List<Float> bucket : buckets) Collections.sort(bucket);
+        for (List<Float> bucket : buckets)
+            Collections.sort(bucket);
         int index = 0;
         for (List<Float> bucket : buckets)
             for (float num : bucket)
                 arr[index++] = num;
     }
 
+    public class TwoDArrayInput {
+        public static void main(String[] args) {
+            Scanner sc = new Scanner(System.in);
+            int[][] arr = new int[3][3];
+
+            // Input
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    arr[i][j] = sc.nextInt();
+                }
+            }
+
+            // Output
+            System.out.println("2D Array:");
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    System.out.print(arr[i][j] + " ");
+                }
+                System.out.println();
+            }
+        }
+    }
+
     // ✨ Main method to test
     public static void main(String[] args) {
-        int[] arr = {5, 2, 9, 1, 5, 6};
-        quickSort(arr, 0, arr.length - 1);  // change to test other sorts
+        int[] arr = { 5, 2, 9, 1, 5, 6 };
+        quickSort(arr, 0, arr.length - 1); // change to test other sorts
         System.out.println("Sorted: " + Arrays.toString(arr));
     }
 }
