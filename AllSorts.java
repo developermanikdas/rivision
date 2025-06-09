@@ -64,7 +64,18 @@ public class AllSorts {
         System.out.println();
     }
 
-
+ // Public API to sort the entire array
+    public static void mergeSort(int[] arr, int left, int right) {
+        if (left < right) {
+            int mid = left + (right - left) / 2;
+            // Sort first half
+            mergeSort(arr, left, mid);
+            // Sort second half
+            mergeSort(arr, mid + 1, right);
+            // Merge the two halves
+            merge(arr, left, mid, right);
+        }
+    }
     public static void main(String[] args) {
         int[] arr = { 3, 1, 5, 4, 2, 0, 6, 7,-9 };
         // bubbleSort(arr);
