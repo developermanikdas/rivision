@@ -1,25 +1,31 @@
-public class MaxSubarraySumWithOneDeletion {
-    public static int maximumSum(int[] arr) {
-        int n = arr.length;
-        int max = arr[0];
+import java.util.*;
 
-        int[] noDelete = new int[n];  // f[i]
-        int[] oneDelete = new int[n]; // g[i]
+public class SubarraySumEqualsK {
+    public static int subarraySum(int[] arr, int k) {
+        Map<Integer, Integer> prefixMap = new HashMap<>();
+        prefixMap.put(0, 1);  // to count subarrays starting from index 0
 
-        noDelete[0] = arr[0];
-        oneDelete[0] = 0;
+        int count = 0;
+        int prefixSum = 0;
 
-        for (int i = 1; i < n; i++) {
-            noDelete[i] = Math.max(noDelete[i - 1] + arr[i], arr[i]);
-            oneDelete[i] = Math.max(oneDelete[i - 1] + arr[i], noDelete[i - 1]);
-            max = Math.max(max, Math.max(noDelete[i], oneDelete[i]));
+        for (int num : arr) {
+            prefixSum += num;
+
+            // Check if there is a prefix that when removed gives sum = k
+            if (prefixMap.containsKey(prefixSum - k)) {
+                count += prefixMap.get(prefixSum - k);
+            }
+
+            // Update prefixMap
+            prefixMap.put(prefixSum, prefixMap.getOrDefault(prefixSum, 0) + 1);
         }
 
-        return max;
+        return count;
     }
 
     public static void main(String[] args) {
-        int[] arr = {1, -2, 0, 3};
-        System.out.println("Max Sum With One Deletion: " + maximumSum(arr));  // Output: 4
+        int[] arr = {3, 4, 7, 2, -3, 1, 4, 2};
+        int k = 7;
+        System.out.println("Total Subarrays with Sum = " + k + ": " + subarraySum(arr, k));  // Output: 4
     }
 }
