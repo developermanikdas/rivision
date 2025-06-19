@@ -1,31 +1,25 @@
 import java.util.*;
 
-public class SubarraySumEqualsK {
-    public static int subarraySum(int[] arr, int k) {
-        Map<Integer, Integer> prefixMap = new HashMap<>();
-        prefixMap.put(0, 1);  // to count subarrays starting from index 0
+public class LongestIncreasingSubsequence {
+    public static int lengthOfLIS(int[] nums) {
+        List<Integer> tails = new ArrayList<>();
 
-        int count = 0;
-        int prefixSum = 0;
+        for (int num : nums) {
+            int idx = Collections.binarySearch(tails, num);
+            if (idx < 0) idx = -(idx + 1); // insertion point
 
-        for (int num : arr) {
-            prefixSum += num;
-
-            // Check if there is a prefix that when removed gives sum = k
-            if (prefixMap.containsKey(prefixSum - k)) {
-                count += prefixMap.get(prefixSum - k);
+            if (idx == tails.size()) {
+                tails.add(num);
+            } else {
+                tails.set(idx, num); // replace
             }
-
-            // Update prefixMap
-            prefixMap.put(prefixSum, prefixMap.getOrDefault(prefixSum, 0) + 1);
         }
 
-        return count;
+        return tails.size();
     }
 
     public static void main(String[] args) {
-        int[] arr = {3, 4, 7, 2, -3, 1, 4, 2};
-        int k = 7;
-        System.out.println("Total Subarrays with Sum = " + k + ": " + subarraySum(arr, k));  // Output: 4
+        int[] nums = {10, 9, 2, 5, 3, 7, 101, 18};
+        System.out.println("LIS Length: " + lengthOfLIS(nums));  // Output: 4
     }
 }
