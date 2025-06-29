@@ -1,46 +1,35 @@
-import java.util.Arrays;
+public class MaxSubarrayWithOneDeletion {
+    public static int maximumSum(int[] arr) {
+        int n = arr.length;
+        int[] forward = new int[n];  // max subarray sum ending at or before i
+        int[] backward = new int[n]; // max subarray sum starting at or after i
 
-public class KthSmallestPairDistance {
+        forward[0] = arr[0];
+        int maxSum = arr[0];
 
-    public static int smallestDistancePair(int[] nums, int k) {
-        Arrays.sort(nums); // Sort the array first
-        int n = nums.length;
-
-        // Binary search on the possible distance range
-        int left = 0, right = nums[n - 1] - nums[0];
-
-        while (left < right) {
-            int mid = (left + right) / 2;
-            int count = countPairs(nums, mid);
-
-            if (count < k) {
-                left = mid + 1; // Too few pairs, increase distance
-            } else {
-                right = mid; // Enough pairs, try smaller distance
-            }
+        // Forward pass (standard Kadane)
+        for (int i = 1; i < n; i++) {
+            forward[i] = Math.max(arr[i], forward[i - 1] + arr[i]);
+            maxSum = Math.max(maxSum, forward[i]);
         }
 
-        return left;
-    }
-
-    // Count how many pairs have distance <= mid
-    private static int countPairs(int[] nums, int maxDist) {
-        int count = 0, left = 0;
-
-        for (int right = 0; right < nums.length; right++) {
-            while (nums[right] - nums[left] > maxDist) {
-                left++;
-            }
-            count += right - left;
+        // Backward pass (reversed Kadane)
+        backward[n - 1] = arr[n - 1];
+        for (int i = n - 2; i >= 0; i--) {
+            backward[i] = Math.max(arr[i], backward[i + 1] + arr[i]);
         }
 
-        return count;
+        // Try deleting one element and combining max subarrays on both sides
+        for (int i = 1; i < n - 1; i++) {
+            int withOneDeletion = forward[i - 1] + backward[i + 1];
+            maxSum = Math.max(maxSum, withOneDeletion);
+        }
+
+        return maxSum;
     }
 
-    // Example usage
     public static void main(String[] args) {
-        int[] nums = {1, 3, 1};
-        int k = 1;
-        System.out.println("K-th smallest distance: " + smallestDistancePair(nums, k));
+        int[] arr = {1, -2, 0, 3};
+        System.out.println("Maximum Sum with One Deletion: " + maximumSum(arr));
     }
 }
