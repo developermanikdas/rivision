@@ -19,6 +19,25 @@ public class MaxSubarraySumAfterOneFlip {
         return Math.max(maxSoFar, flipMaxSoFar);
     }
 
+    public static int longestSubarraySumLEK(int[] arr, int k) {
+        int n = arr.length;
+        int maxLen = 0;
+        int sum = 0;
+        int left = 0;
+
+        for (int right = 0; right < n; right++) {
+            sum += arr[right];
+
+            while (sum > k && left <= right) {
+                sum -= arr[left++];
+            }
+
+            maxLen = Math.max(maxLen, right - left + 1);
+        }
+
+        return maxLen;
+    }
+
     public static void main(String[] args) {
         int[] arr = { 1, -2, 0, 3 };
         System.out.println("Maximum sum after one flip: " + maxSubarraySumWithOneFlip(arr));
