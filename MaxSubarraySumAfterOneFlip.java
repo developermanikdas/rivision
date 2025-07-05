@@ -1,4 +1,5 @@
- import java.util.*;
+import java.util.*;
+
 public class MaxSubarraySumAfterOneFlip {
     public static int maxSubarraySumWithOneFlip(int[] arr) {
         int n = arr.length;
@@ -58,34 +59,30 @@ public class MaxSubarraySumAfterOneFlip {
         return count;
     }
 
-   
-
-public static int shortestSubarray(int[] nums, int k) {
-    int n = nums.length;
-    long[] prefix = new long[n + 1];
-    for (int i = 0; i < n; i++) {
-        prefix[i + 1] = prefix[i] + nums[i];
-    }
-
-    int minLen = n + 1;
-    Deque<Integer> deque = new ArrayDeque<>();
-
-    for (int i = 0; i <= n; i++) {
-        while (!deque.isEmpty() && prefix[i] - prefix[deque.peekFirst()] >= k) {
-            minLen = Math.min(minLen, i - deque.pollFirst());
+    public static int shortestSubarray(int[] nums, int k) {
+        int n = nums.length;
+        long[] prefix = new long[n + 1];
+        for (int i = 0; i < n; i++) {
+            prefix[i + 1] = prefix[i] + nums[i];
         }
 
-        while (!deque.isEmpty() && prefix[i] <= prefix[deque.peekLast()]) {
-            deque.pollLast();
+        int minLen = n + 1;
+        Deque<Integer> deque = new ArrayDeque<>();
+
+        for (int i = 0; i <= n; i++) {
+            while (!deque.isEmpty() && prefix[i] - prefix[deque.peekFirst()] >= k) {
+                minLen = Math.min(minLen, i - deque.pollFirst());
+            }
+
+            while (!deque.isEmpty() && prefix[i] <= prefix[deque.peekLast()]) {
+                deque.pollLast();
+            }
+
+            deque.offerLast(i);
         }
 
-        deque.offerLast(i);
+        return minLen <= n ? minLen : -1;
     }
-
-    return minLen <= n ? minLen : -1;
-}
-
-   
 
     public static int findMaxValueOfEquation(int[][] points, int k) {
         int max = Integer.MIN_VALUE;
@@ -113,7 +110,23 @@ public static int shortestSubarray(int[] nums, int k) {
         return max;
     }
 
+    public static int majorityElement(int[] nums) {
+        int count = 0;
+        int candidate = 0;
+
+        for (int num : nums) {
+            if (count == 0) {
+                candidate = num;
+            }
+
+            count += (num == candidate) ? 1 : -1;
+        }
+
+        return candidate;
+    }
+
     public static void main(String[] args) {
+
         int[] arr = { 1, -2, 0, 3 };
         System.out.println("Maximum sum after one flip: " + maxSubarraySumWithOneFlip(arr));
     }
