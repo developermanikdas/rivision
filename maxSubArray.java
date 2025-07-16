@@ -1,5 +1,5 @@
-public class Main {
-
+public class maxSubArray {
+    // Function to find the maximum subarray sum using Kadane's algorithm                                                                                                                       
     public static int maxSubArray(int[] nums) {
         int maxSoFar = nums[0];
         int currentMax = nums[0];
@@ -25,4 +25,5 @@ public class Main {
         int[] nums3 = {5, 4, -1, 7, 8};
         System.out.println("Maximum Subarray Sum (Example 3): " + maxSubArray(nums3));
     }
+
 }
