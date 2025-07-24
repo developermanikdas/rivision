@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="popup.css">
+    <title>Social Media Blocker</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚫 Social Media Blocker</h1>
+            <p class="subtitle">Healthy digital habits made easy</p>
+        </div>
+        
+        <div class="status-section">
+            <div id="active-sessions" class="session-list">
+                <!-- Active sessions will be populated here -->
+            </div>
+        </div>
+
+        <div class="info-section">
+            <div class="feature-card">
+                <div class="feature-icon">⏰</div>
+                <div class="feature-content">
+                    <h3>Automatic Detection</h3>
+                    <p>Extension automatically detects when you visit social media sites</p>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <div class="feature-content">
+                    <h3>Full-Screen Blocking</h3>
+                    <p>Complete site blocking when your time limit is reached</p>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <div class="feature-content">
+                    <h3>Daily Limits</h3>
+                    <p>Set time limits for each social media platform</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button id="clear-all-btn" class="secondary-btn">
+                🗑️ Clear All Sessions
+            </button>
+        </div>
+
+        <div class="footer">
+            <p>Visit any social media site to set your time limit!</p>
+        </div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>
