@@ -1,5 +1,3 @@
-import java.util.*;
-
 public class MaximumANDValue {
 
     public static int maxAND(int[] arr) {
