@@ -1,5 +1,3 @@
-import java.util.*;
-
 public class AllocateBooks {
 
     // Feasibility: can we allocate with max pages per student <= limit using at most m students?
